@@ -1,12 +1,10 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
+
 include '../../control/conexion.php';
-
-$selec = "SELECT * FROM `docentes`";
-$ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
-
-
+$id = $_GET['id'];
+$tuser = "SELECT * FROM `usuario` WHERE `id` ='$id'";
+$ejecutar = $conexion->query($tuser);
+$datos = $ejecutar->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,10 +78,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -120,13 +118,13 @@ $numDatos = $ejecutar->num_rows;
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span
-                                    class="fa arrow"></span></a>
+                                class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../usuario/listar-u.php">Listar</a>
+                                <a href="listar-u.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../usuario/alta-u.php">Alta</a>
+                                <a href="alta-u.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -142,47 +140,51 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Editar Usuario <b><?php echo $datos['nombre'] ?></b></h1>
                 </div>
-                <?php include '../../control/mensajes.php' ?>
             </div>
 
             <!-- ... Your content goes here ... -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
-                                echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<tr>";
-                            }
+                    <?php include '../../control/mensajes.php'?>
+                    <form action="../../control/usuario/actualizar-u.php" method="post" class="form-horizontal"
+                        <div class="form-group">
+                            <label class="col-md-1">Email</label>
+                            <div class="col-md-5">
+                                <input type="email"  disabled class="form-control" name="mail" value="<?php echo $datos['email'] ?>">
+                            </div>
+                        </div>
+                    <br><br>
+                        <div class="form-group">
+                            <label class="col-md-1">Contraseña</label>
+                            <div class="col-md-5">
+                                <input type="password"  class="form-control " name="pass" value="<?php echo $datos['password'] ?>">
+                            </div>
 
-                            $conexion->close();
-                            ?>
+                        </div>
+                    <br>
+                        <div class="form-group">
+                            <label class="col-md-2">Confirme su contraseña</label>
+                            <div class="col-md-5">
+                                <input type="password"  class="form-control " name="pass2" value="<?php echo $datos['password'] ?>">
+                            </div>
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </div>
+                    <br><br>
+                        <div class="form-group">
+                            <label class="col-md-2">Tipo</label>
+                            <div class="col-md-5">
+                                <input type="radio"   name="tipo" value="0" <?php if ($datos['tipo'] == 0){echo "checked";} ?>>Administrador
+                                <input type="radio"   name="tipo" value="1" <?php if ($datos['tipo'] == 1){echo "checked";} ?>>Docente
 
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Actualizar</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 

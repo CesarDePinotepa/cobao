@@ -1,12 +1,4 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
-include '../../control/conexion.php';
-
-$selec = "SELECT * FROM `docentes`";
-$ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,10 +72,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -91,10 +83,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../curso/listar-c.php">Listar</a>
+                                <a href="listar-c.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../curso/alta-c.php">Alta</a>
+                                <a href="alta-c.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -142,47 +134,52 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Alta de cursos</h1>
                 </div>
-                <?php include '../../control/mensajes.php' ?>
             </div>
 
             <!-- ... Your content goes here ... -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
-                                echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<tr>";
-                            }
+                    <?php include '../../control/mensajes.php'?>
+                    <form action="../../control/curso/guardar-c.php" method="post" class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-md-1">Nombre</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control" name="nomTxt"> </div>
 
-                            $conexion->close();
-                            ?>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Clave</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control" name="claTxt"> </div>
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Grado</label>
+                            <div class="col-md-5">
+                                <select name="graSel" id=""  class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
 
+                            <div class="form-group">
+                                <label class="col-md-1">Descripción</label>
+                                <div class="col-md-5">
+                                    <input type="text"  class="form-control" name="desTxt"> </div>
+
+                            </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Guardar</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 

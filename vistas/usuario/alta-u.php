@@ -1,12 +1,4 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
-include '../../control/conexion.php';
-
-$selec = "SELECT * FROM `docentes`";
-$ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,6 +35,16 @@ $numDatos = $ejecutar->num_rows;
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        window.onload = function(){
+            var lista = document.getElementById("tipo");
+            lista.onchange = selecionarPer;
+
+            function selecionarPer(){
+                window.location = "?perSel="+lista.value;
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -80,10 +82,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -120,13 +122,13 @@ $numDatos = $ejecutar->num_rows;
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span
-                                    class="fa arrow"></span></a>
+                                class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../usuario/listar-u.php">Listar</a>
+                                <a href="listar-u.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../usuario/alta-u.php">Alta</a>
+                                <a href="alta-u.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -142,47 +144,78 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Alta de Usuario</h1>
                 </div>
-                <?php include '../../control/mensajes.php' ?>
             </div>
 
             <!-- ... Your content goes here ... -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
-                                echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<tr>";
-                            }
+                    <?php include '../../control/mensajes.php'?>
+                    <form action="../../control/usuario/guardar-u.php" method="post" class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-md-1">Nombre</label>
+                            <div class="col-md-5">
+                                <select name="perSel" id="tipo" class="form-control">
+                                <?php
+                                    include '../../control/conexion.php';
+                                    $tuser = "SELECT * FROM `docentes`";
+                                    $ejecutar = $conexion->query($tuser);
 
-                            $conexion->close();
-                            ?>
+                                    if (isset($_GET['perSel'])&& !empty($_GET['perSel'])) {
+                                        $id = $_GET['perSel'];
+                                        $sql = "SELECT * FROM `docentes` WHERE `id` ='$id'";
+                                        $ejecutar2 = $conexion->query($sql);
+                                        $regs = $ejecutar2->fetch_assoc();
 
-                            </tbody>
-                        </table>
-                    </div>
+                                        echo "<option value='".$regs['id']."'>
+                                           ".$regs['apaterno']." ".$regs['amaterno']." ".$regs['nombre']."</option> ";
 
+                                    }
+
+                                    while ($datos = $ejecutar->fetch_assoc()) {
+                                        echo "<option value='".$datos['id']."'>
+                                           ".$datos['apaterno']." ".$datos['amaterno']." ".$datos['nombre']."</option> ";
+                                     }
+
+                                ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="nomHdn" value="<?php echo $regs['apaterno']." ".$regs['amaterno']." ".$regs['nombre'] ?>">
+                        <div class="form-group">
+                            <label class="col-md-1">Email</label>
+                            <div class="col-md-5">
+                                <input type="email"  id="demo" class="form-control" name="mail" value="<?php if (isset($_GET['perSel'])&& !empty($_GET['perSel'])) {echo $regs['email']; } ?>"> </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-1">Contraseña</label>
+                            <div class="col-md-5">
+                                <input type="password"  class="form-control " name="pass"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">Confirme su contraseña</label>
+                            <div class="col-md-5">
+                                <input type="password"  class="form-control " name="pass2"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2">Tipo</label>
+                            <div class="col-md-5">
+                                <input type="radio"   name="tipo" value="0">Administrador
+                                <input type="radio"   name="tipo" value="1">Docente
+
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Guardar</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 

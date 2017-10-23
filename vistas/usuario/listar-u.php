@@ -2,9 +2,9 @@
 ini_set ('error_reporting', E_ALL & ~E_NOTICE);
 include '../../control/conexion.php';
 
-$selec = "SELECT * FROM `docentes`";
+$selec = "SELECT * FROM `usuario`";
 $ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
+
 
 
 ?>
@@ -80,10 +80,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -91,10 +91,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../curso/listar-c.php">Listar</a>
+                                <a href="listar-c.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../curso/alta-c.php">Alta</a>
+                                <a href="alta-c.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -120,7 +120,7 @@ $numDatos = $ejecutar->num_rows;
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span
-                                    class="fa arrow"></span></a>
+                                class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="../usuario/listar-u.php">Listar</a>
@@ -142,7 +142,7 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Cursos</h1>
                 </div>
                 <?php include '../../control/mensajes.php' ?>
             </div>
@@ -156,10 +156,10 @@ $numDatos = $ejecutar->num_rows;
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
+                                <th>Email</th>
+                                <th>Contraseña</th>
+                                <th>Tipo</th>
+                                <th>Eliminar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -168,11 +168,16 @@ $numDatos = $ejecutar->num_rows;
                                 $id = $datos['id'];
                                 echo "<tr>";
                                 echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
+                                echo "<td> <a href='editar-u.php?id=$id'>". $datos['nombre']  ."</a></td>";
+                                echo "<td>". $datos['email']."</td>";
+                                echo "<td>". $datos['password'] ."</td>";
+
+                                if ($datos['tipo'] ==0 ){
+                                    echo "<td> Administrador</td>";
+                                }else{
+                                    echo "<td>Docente</td>";
+                                }
+                                echo "<td><a href='' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
                                 echo "<tr>";
                             }
 

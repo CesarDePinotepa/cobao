@@ -2,7 +2,7 @@
 ini_set ('error_reporting', E_ALL & ~E_NOTICE);
 include '../../control/conexion.php';
 
-$selec = "SELECT * FROM `docentes`";
+$selec = "SELECT * FROM `estudiante` WHERE `estado` ='1' ";
 $ejecutar = $conexion->query($selec);
 $numDatos = $ejecutar->num_rows;
 
@@ -80,10 +80,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -102,10 +102,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../estudiante/listar-e.php">Listar</a>
+                                <a href="listar-e.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../estudiante/alta-e.php">Alta</a>
+                                <a href="alta-e.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -142,7 +142,7 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Estudiantes</h1>
                 </div>
                 <?php include '../../control/mensajes.php' ?>
             </div>
@@ -155,11 +155,11 @@ $numDatos = $ejecutar->num_rows;
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>No.Control</th>
                                 <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
+                                <th>Grado</th>
+                                <th>Email</th>
+                                <th>Baja</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -168,11 +168,11 @@ $numDatos = $ejecutar->num_rows;
                                 $id = $datos['id'];
                                 echo "<tr>";
                                 echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
+                                echo "<td><a href='editar-e.php?id=$id'>". $datos['num_control']."</td>";
+                                echo "<td> ". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
+                                echo "<td>". $datos['grado']."</td>";
+                                echo "<td>". $datos['email'] ."</td>";
+                                echo "<td><a href='../../control/estudiante/baja-e.php?id=$id' onclick='return confirm(\"¿Está seguro de esta operación?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
                                 echo "<tr>";
                             }
 

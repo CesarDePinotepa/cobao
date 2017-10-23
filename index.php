@@ -39,82 +39,44 @@
 <body>
 
 <div id="wrapper">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <div class="navbar-header">
-            <a href="" class="navbar-brand">Plataforma Educativa - COBAO Plantel 48</a>
-        </div>
-        <!-- Top Navigation: Left Menu -->
-
-        <!-- Top Navigation: Right Menu -->
-        <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador</a>
-
-            </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-
-            </li>
-        </ul>
-
-        <!-- Sidebar -->
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-
-                <ul class="nav" id="side-menu">
-                    <li>
-                        <a href="index.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="vistas/docentes/listar.php">Listar</a>
-                            </li>
-                            <li>
-                                <a href="vistas/docentes/alta.php">Alta</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Listar</a>
-                            </li>
-                            <li>
-                                <a href="#">Alta</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes</a>
-                    </li>
-                    <li>
-                        <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
-                    </li>
-                    <li>
-                        <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>
-                    <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Inicio de Sesión</h1>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Bienvenida</h1>
+                    <?php include 'control/mensajes.php'?>
+                    <form action="control/login.php" method="post" class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-md-1">Email</label>
+                            <div class="col-md-5">
+                                <input type="email"  class="form-control" name="usrTxt"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Contraseña</label>
+                            <div class="col-md-5">
+                                <input type="password"  class="form-control" name="pass"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Tipo de usuario</label>
+                            <div class="col-md-5">
+                                <input type="radio" name="tipo" value="0">Administrador
+                                <input type="radio" name="tipo" value="1">Docente
+                                <input type="radio" name="tipo" value="2">Estudiante
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Ingresar</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 

@@ -75,7 +75,7 @@
                                 <a href="listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="#">Alta</a>
+                                <a href="alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -83,15 +83,23 @@
                         <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Listar</a>
+                                <a href="../curso/listar-c.php">Listar</a>
                             </li>
                             <li>
-                                <a href="#">Alta</a>
+                                <a href="../curso/alta-c.php">Alta</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes</a>
+                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../estudiante/listar-e.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../estudiante/alta-e.php">Alta</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
@@ -101,6 +109,18 @@
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span
+                                    class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../usuario/listar-u.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../usuario/alta-u.php">Alta</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 

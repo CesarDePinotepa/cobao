@@ -1,11 +1,9 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
 include '../../control/conexion.php';
-
-$selec = "SELECT * FROM `docentes`";
+$id = $_GET['id'];
+$selec = "SELECT * FROM `estudiante` WHERE `id` = '$id' ";
 $ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
-
+$datos = $ejecutar->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -80,10 +78,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -102,10 +100,10 @@ $numDatos = $ejecutar->num_rows;
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../estudiante/listar-e.php">Listar</a>
+                                <a href="listar-e.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../estudiante/alta-e.php">Alta</a>
+                                <a href="alta-e.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -142,47 +140,83 @@ $numDatos = $ejecutar->num_rows;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
+                    <h1 class="page-header">Editar estudiante: <b><?php echo $datos['apaterno']." ".$datos['amaterno']." ". $datos['nombre']  ?></b></h1>
                 </div>
-                <?php include '../../control/mensajes.php' ?>
             </div>
 
             <!-- ... Your content goes here ... -->
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Inhabilitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
-                                echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<tr>";
-                            }
+                    <?php include '../../control/mensajes.php'?>
+                    <form action="../../control/estudiante/actualizar-e.php" method="post" class="form-horizontal" >
+                        <div class="form-group">
+                            <label class="col-md-1">No. Control</label>
+                            <div class="col-md-5">
+                                <input type="text" disabled  class="form-control " name="nomTxt" value="<?php echo $datos['num_control'] ?>"> </div>
 
-                            $conexion->close();
-                            ?>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Nombre</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control " name="nomTxt" value="<?php echo $datos['nombre'] ?>"> </div>
 
-                            </tbody>
-                        </table>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Apellido Paterno</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control" name="apaTxt" value="<?php echo $datos['apaterno'] ?>"> </div>
 
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Apellido Materno</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control " name="amaTxt" value="<?php echo $datos['amaterno'] ?>"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">CURP</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control" name="curpTxt" value="<?php echo $datos['curp'] ?>"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Grado</label>
+                            <div class="col-md-5">
+                                <select name="graSel" id="" class="form-control">
+                                    <option value="<?php echo $datos['grado'] ?>"><?php echo $datos['grado'] ?></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Escuela de procedencia</label>
+                            <div class="col-md-5">
+                                <input type="text"  class="form-control " name="escTxt" value="<?php echo $datos['escuela_proce'] ?>"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1">Email</label>
+                            <div class="col-md-5">
+                                <input type="email"  class="form-control " name="email" value="<?php echo $datos['email'] ?>"> </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Fecha de nacimiento</label>
+                            <div class="col-md-5">
+                                <input type="date"  class="form-control " name="date" value="<?php echo $datos['fecha_nac'] ?>"> </div>
+
+                        </div>
+                        <input type="hidden" value="<?php echo $id ?>" name="idHdn">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">Actualizar</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
 
