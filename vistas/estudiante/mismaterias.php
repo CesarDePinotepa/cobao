@@ -95,14 +95,45 @@ if ($obj_ses->check_sess('userid')) {
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Bienvenido: <?php echo $obj_ses->get_value('nombre') ?></h1>
+                    <h1 class="page-header">Cursos</h1>
                 </div>
+                <?php include '../../control/mensajes.php' ?>
             </div>
 
             <!-- ... Your content goes here ... -->
             <div class="row">
                 <div class="col-lg-12">
-                    mis materias
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Clave</th>
+                                <th>Semestre</th>
+                                <th>Eliminar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0;
+                            while ($datos = $ejecutar->fetch_assoc()) {
+                                $id = $datos['id'];
+                                echo "<tr>";
+                                echo "<td>". $i += 1 ."</td>";
+                                echo "<td> <a href='editar-c.php?id=$id'>". $datos['nombre']  ."</a></td>";
+                                echo "<td>". $datos['clave']."</td>";
+                                echo "<td>". $datos['grado'] ."</td>";
+                                echo "<td><a href='../../control/curso/eliminar-c.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
+                                echo "<tr>";
+                            }
+
+                            $conexion->close();
+                            ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
 

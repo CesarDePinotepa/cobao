@@ -5,6 +5,8 @@ if ($obj_ses->check_sess('userid')) {
     require_once '../../plantillas/header-a.php';
     include "../../control/conexion.php";
     ?>
+<div id="page-wrapper">
+    <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Asignación de materias</h1>
