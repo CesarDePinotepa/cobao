@@ -69,10 +69,10 @@ if ($obj_ses->check_sess('userid')) {
 
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                            <a href="menuPrincipal.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
+                            <a href="#" class="active"><i class="fa fa-user-plus fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="vistas/docentes/listar.php">Listar</a>
@@ -83,7 +83,7 @@ if ($obj_ses->check_sess('userid')) {
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
+                            <a href="#" class="active"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="vistas/curso/listar-c.php">Listar</a>
@@ -94,7 +94,7 @@ if ($obj_ses->check_sess('userid')) {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span
+                            <a href="#" class="active"><i class="fa fa-users fa-fw"></i>Estudiantes <span
                                     class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -106,11 +106,22 @@ if ($obj_ses->check_sess('userid')) {
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
+                            <a href="#" class="active"><i class="fa fa-bookmark fa-fw"></i>Grupos <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="vistas/grupos/listar-a.php">Listar</a>
+                                </li>
+                                <li>
+                                    <a href="vistas/grupos/alta-a.php">Alta</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
+                            <a href="vistas/grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
+                        </li><!--
+                        <li>
                             <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                        </li>
+                        </li>-->
                         <li>
                             <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
@@ -138,7 +149,7 @@ if ($obj_ses->check_sess('userid')) {
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Bienvenido Usuario <?php echo $obj_ses->get_value('nombre') ?></h1>
+                        <h1 class="page-header">Bienvenido Usuario: <?php echo $obj_ses->get_value('nombre') ?></h1>
                     </div>
                 </div>
 

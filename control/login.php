@@ -5,26 +5,25 @@ if (isset($_POST['usrTxt']) && !empty($_POST['usrTxt'])) {
     # code...
     $email = $_POST['usrTxt'];
     $pass = md5($_POST['pass']);
-    $tipo = $_POST['tipo'];
 
-    $comprobar = "SELECT  *  FROM `usuario` WHERE `email` = '$email' AND `password` = '$pass' AND `tipo` ='$tipo'";
+    $comprobar = "SELECT  *  FROM `usuario` WHERE (`email` = '$email' AND `password` = '$pass') OR `nombre` = '$email' AND `password` = '$pass' ";
     $ejecutar2 = $conexion->query($comprobar);
     $result = $ejecutar2->fetch_assoc();
-
-    if ($ejecutar2) {
+    $num = $ejecutar2->num_rows;
+    if ($num > 0) {
         $obj_ses = new Simple_sessions();
         $data = array('userid' => $result['id'],
             'nombre' => $result['nombre']);
 
         $obj_ses->add_sess($data);
-        if ($tipo == 1){
-            header('../menuDocente.php');
+        if ($result['tipo'] == 1){
+            header('Location: ../menuDocente.php');
         }
-        elseif ($tipo == 0){
-            header('location: ../menuPrincipal.php');
+        elseif ($result['tipo'] == 0){
+            header('Location: ../menuPrincipal.php');
         }
         else{
-            header('');
+            header('Location: ../menuEstudiante.php');
         }
 
     }else {

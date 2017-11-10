@@ -1,14 +1,3 @@
-<?php
-require_once '../../librerias/Simple_sessions.php';
-$obj_ses = new Simple_sessions();
-if ($obj_ses->check_sess('userid')) {
-    ini_set ('error_reporting', E_ALL & ~E_NOTICE);
-    include '../../control/conexion.php';
-
-    $selec = "SELECT * FROM `docentes`";
-    $ejecutar = $conexion->query($selec);
-    $numDatos = $ejecutar->num_rows;
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -78,24 +67,24 @@ if ($obj_ses->check_sess('userid')) {
                         <a href="../../menuPrincipal.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-user-plus fa-fw"></i> Docentes<span class="fa arrow"></span></a>
+                        <a href="#" class="active"><i class="fa fa-user-plus fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="listar.php">Listar</a>
+                                <a href="../../vistas/docentes/listar.php">Listar</a>
                             </li>
                             <li>
-                                <a href="alta.php">Alta</a>
+                                <a href="../../vistas/docentes/alta.php">Alta</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
+                        <a href="#" class="active"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../curso/listar-c.php">Listar</a>
+                                <a href="../../vistas/curso/listar-c.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../curso/alta-c.php">Alta</a>
+                                <a href="../../vistas/curso/alta-c.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -103,10 +92,10 @@ if ($obj_ses->check_sess('userid')) {
                         <a href="#" class="active"><i class="fa fa-users fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../estudiante/listar-e.php">Listar</a>
+                                <a href="../../vistas/estudiante/listar-e.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../estudiante/alta-e.php">Alta</a>
+                                <a href="../../vistas/estudiante/alta-e.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -114,31 +103,31 @@ if ($obj_ses->check_sess('userid')) {
                         <a href="#" class="active"><i class="fa fa-bookmark fa-fw"></i>Grupos <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../grupos/listar-a.php">Listar</a>
+                                <a href="../../vistas/grupos/listar-a.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../grupos/alta-a.php">Alta</a>
+                                <a href="../../vistas/grupos/alta-a.php">Alta</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="../grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
-                    </li><!--
+                        <a href="../../vistas/grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
+                    </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>-->
+                    </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span
-                                    class="fa arrow"></span></a>
+                                class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../usuario/listar-u.php">Listar</a>
+                                <a href="../../usuario/listar-u.php">Listar</a>
                             </li>
                             <li>
-                                <a href="../usuario/alta-u.php">Alta</a>
+                                <a href="../../usuario/alta-u.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -147,81 +136,3 @@ if ($obj_ses->check_sess('userid')) {
             </div>
         </div>
     </nav>
-
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Lista de Docentes</h1>
-                </div>
-                <?php include '../../control/mensajes.php' ?>
-            </div>
-
-            <!-- ... Your content goes here ... -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nombre</th>
-                                <th>RFC</th>
-                                <th>Teléfono</th>
-                                <th>Área</th>
-                                <th>Ver materias</th>
-                                <th>Inhabilitar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
-                                echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-d.php?id=$id'>". $datos['nombre'] ." ". $datos['apaterno']." ".$datos['amaterno'] ."</a></td>";
-                                echo "<td>". $datos['rfc']."</td>";
-                                echo "<td>". $datos['telefono'] ."</td>";
-                                echo "<td>". $datos['area'] ."</td>";
-                                echo "<td> <a href='mismaterias.php?id=$id'><i class='fa fa-eye fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<td><a href='../../control/docentes/eliminar-d.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
-                                echo "<tr>";
-                            }
-
-                            $conexion->close();
-                            ?>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-<!-- jQuery -->
-<script src="../../js/jquery.min.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="../../js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="../../js/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="../../js/startmin.js"></script>
-
-</body>
-</html>
-
-<?php
-}else{
-    header("Location: ../../index.php");
-}
-?>

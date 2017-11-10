@@ -55,7 +55,7 @@ if ($obj_ses->check_sess('userid')) {
 
             <!-- Top Navigation: Right Menu -->
             <ul class="nav navbar-right navbar-top-links">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Docente</a>
+                <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Docente: <?php echo $obj_ses->get_value('nombre')?> </a>
 
                 </li>
                 <li><a href="control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
@@ -69,50 +69,18 @@ if ($obj_ses->check_sess('userid')) {
 
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="index.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                            <a href="menuDocente.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="vistas/docentes/listar.php">Listar</a>
-                                </li>
-                                <li>
-                                    <a href="vistas/docentes/alta.php">Alta</a>
-                                </li>
-                            </ul>
+                            <a href="" class="active"><i class="fa fa-users fa-fw"></i>Grupos </a>
+
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-calendar fa-fw"></i>Cursos<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="vistas/curso/listar-c.php">Listar</a>
-                                </li>
-                                <li>
-                                    <a href="vistas/curso/alta-c.php">Alta</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span
-                                    class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="vistas/estudiante/listar-e.php">Listar</a>
-                                </li>
-                                <li>
-                                    <a href="vistas/estudiante/alta-e.php">Alta</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
-                        </li>
-                        <li>
-                            <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                        </li>
+
                         <li>
                             <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                        </li>
+                        <li>
+                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -131,6 +99,10 @@ if ($obj_ses->check_sess('userid')) {
                 </div>
 
                 <!-- ... Your content goes here ... -->
+                <div class="row">
+                    <div class="col-lg-12">
+                    </div>
+                </div>
 
 
             </div>

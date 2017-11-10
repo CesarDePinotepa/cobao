@@ -1,12 +1,13 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
-include '../../control/conexion.php';
 
-$selec = "SELECT * FROM `usuario`";
-$ejecutar = $conexion->query($selec);
+require_once '../../librerias/Simple_sessions.php';
+$obj_ses = new Simple_sessions();
+if ($obj_ses->check_sess('userid')) {
+    ini_set ('error_reporting', E_ALL & ~E_NOTICE);
+    include '../../control/conexion.php';
 
-
-
+    $selec = "SELECT * FROM `usuario`";
+    $ejecutar = $conexion->query($selec);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,10 +61,10 @@ $ejecutar = $conexion->query($selec);
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador</a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador: <?php echo $obj_ses->get_value('nombre')?></a>
 
             </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="../../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 
             </li>
         </ul>
@@ -110,6 +111,17 @@ $ejecutar = $conexion->query($selec);
                         </ul>
                     </li>
                     <li>
+                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Grupos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../grupos/listar-a.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../grupos/alta-a.php">Alta</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
                     </li>
                     <li>
@@ -142,7 +154,7 @@ $ejecutar = $conexion->query($selec);
 
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cursos</h1>
+                    <h1 class="page-header">Usuarios</h1>
                 </div>
                 <?php include '../../control/mensajes.php' ?>
             </div>
@@ -210,4 +222,8 @@ $ejecutar = $conexion->query($selec);
 
 </body>
 </html>
-
+<?php
+}else{
+    header("Location: ../../index.php");
+}
+?>

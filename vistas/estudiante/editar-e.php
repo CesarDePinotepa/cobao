@@ -1,9 +1,13 @@
 <?php
-include '../../control/conexion.php';
-$id = $_GET['id'];
-$selec = "SELECT * FROM `estudiante` WHERE `id` = '$id' ";
-$ejecutar = $conexion->query($selec);
-$datos = $ejecutar->fetch_assoc();
+
+require_once '../../librerias/Simple_sessions.php';
+$obj_ses = new Simple_sessions();
+if ($obj_ses->check_sess('userid')) {
+    include '../../control/conexion.php';
+    $id = $_GET['id'];
+    $selec = "SELECT * FROM `estudiante` WHERE `id` = '$id' ";
+    $ejecutar = $conexion->query($selec);
+    $datos = $ejecutar->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -58,10 +62,10 @@ $datos = $ejecutar->fetch_assoc();
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador</a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador: <?php echo $obj_ses->get_value('nombre')?></a>
 
             </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="../../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 
             </li>
         </ul>
@@ -72,10 +76,10 @@ $datos = $ejecutar->fetch_assoc();
 
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="../../index.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                        <a href="../../menuPrincipal.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user-plus fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="../docentes/listar.php">Listar</a>
@@ -97,7 +101,7 @@ $datos = $ejecutar->fetch_assoc();
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
+                        <a href="#" class="active"><i class="fa fa-users fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="listar-e.php">Listar</a>
@@ -108,11 +112,22 @@ $datos = $ejecutar->fetch_assoc();
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
+                        <a href="#" class="active"><i class="fa fa-bookmark fa-fw"></i>Grupos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../grupos/listar-a.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../grupos/alta-a.php">Alta</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
+                        <a href="../grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
+                    </li><!--
+                    <li>
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
@@ -180,7 +195,7 @@ $datos = $ejecutar->fetch_assoc();
 
                         </div>
                         <div class="form-group">
-                            <label class="col-md-1">Grado</label>
+                            <label class="col-md-1">Semestre</label>
                             <div class="col-md-5">
                                 <select name="graSel" id="" class="form-control">
                                     <option value="<?php echo $datos['grado'] ?>"><?php echo $datos['grado'] ?></option>
@@ -240,3 +255,8 @@ $datos = $ejecutar->fetch_assoc();
 </body>
 </html>
 
+<?php
+}else{
+    header("Location: ../../index.php");
+}
+?>

@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label class="col-md-1">Email</label>
                             <div class="col-md-5">
-                                <input type="email"  class="form-control" name="usrTxt"> </div>
+                                <input type="text"  class="form-control" name="usrTxt"> </div>
 
                         </div>
                         <div class="form-group">
@@ -63,14 +63,6 @@
                             <div class="col-md-5">
                                 <input type="password"  class="form-control" name="pass"> </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2">Tipo de usuario</label>
-                            <div class="col-md-5">
-                                <input type="radio" name="tipo" value="0">Administrador
-                                <input type="radio" name="tipo" value="1">Docente
-                                <input type="radio" name="tipo" value="2">Estudiante
-                            </div>
                         </div>
                         <div class="col-sm-12">
                             <button class="btn btn-success">Ingresar</button>

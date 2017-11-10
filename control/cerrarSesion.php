@@ -1,7 +1,13 @@
+<?php
 
-<?php require_once '../librerias/Simple_sessions.php';
-    // Destruye toda la sesión
-    destroy_sess();
 
-    header('location: ../index.php' );
+session_start();
+// Destruye todas las variables de la sesion
+session_unset();
+// Finalmente, destruye la sesion
+session_destroy();
+
+//Redireccionar a la /pagina de login
+header ("Location: ../index.php");
+
 ?>

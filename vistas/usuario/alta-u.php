@@ -1,4 +1,7 @@
 <?php
+require_once '../../librerias/Simple_sessions.php';
+$obj_ses = new Simple_sessions();
+if ($obj_ses->check_sess('userid')) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,10 +65,10 @@
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador</a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador: <?php echo $obj_ses->get_value('nombre')?></a>
 
             </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="../../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 
             </li>
         </ul>
@@ -108,6 +111,17 @@
                             </li>
                             <li>
                                 <a href="../estudiante/alta-e.php">Alta</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Grupos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../grupos/listar-a.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../grupos/alta-a.php">Alta</a>
                             </li>
                         </ul>
                     </li>
@@ -211,6 +225,7 @@
 
                             </div>
                         </div>
+
                         <div class="col-sm-12">
                             <button class="btn btn-success">Guardar</button>
 
@@ -239,3 +254,8 @@
 </body>
 </html>
 
+    <?php
+}else{
+    header("Location: ../../index.php");
+}
+?>

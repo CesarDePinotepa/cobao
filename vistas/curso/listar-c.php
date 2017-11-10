@@ -1,12 +1,13 @@
 <?php
-ini_set ('error_reporting', E_ALL & ~E_NOTICE);
-include '../../control/conexion.php';
+require_once '../../librerias/Simple_sessions.php';
+$obj_ses = new Simple_sessions();
+if ($obj_ses->check_sess('userid')) {
+    ini_set ('error_reporting', E_ALL & ~E_NOTICE);
+    include '../../control/conexion.php';
 
-$selec = "SELECT * FROM `curso`";
-$ejecutar = $conexion->query($selec);
-$numDatos = $ejecutar->num_rows;
-
-
+    $selec = "SELECT * FROM `curso`";
+    $ejecutar = $conexion->query($selec);
+    $numDatos = $ejecutar->num_rows;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,10 +61,10 @@ $numDatos = $ejecutar->num_rows;
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador</a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Administrador: <?php echo $obj_ses->get_value('nombre') ?></a>
 
             </li>
-            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="../../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 
             </li>
         </ul>
@@ -74,10 +75,10 @@ $numDatos = $ejecutar->num_rows;
 
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="../../index.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                        <a href="../../menuPrincipal.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> Docentes<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user-plus fa-fw"></i> Docentes<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="../docentes/listar.php">Listar</a>
@@ -99,7 +100,7 @@ $numDatos = $ejecutar->num_rows;
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
+                        <a href="#" class="active"><i class="fa fa-users fa-fw"></i>Estudiantes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="../estudiante/listar-e.php">Listar</a>
@@ -110,11 +111,22 @@ $numDatos = $ejecutar->num_rows;
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
+                        <a href="#" class="active"><i class="fa fa-bookmark fa-fw"></i>Grupos <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../grupos/listar-a.php">Listar</a>
+                            </li>
+                            <li>
+                                <a href="../grupos/alta-a.php">Alta</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
+                        <a href="../grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
+                    </li><!--
+                    <li>
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
@@ -157,7 +169,7 @@ $numDatos = $ejecutar->num_rows;
                                 <th>#</th>
                                 <th>Nombre</th>
                                 <th>Clave</th>
-                                <th>Grado</th>
+                                <th>Semestre</th>
                                 <th>Eliminar</th>
                             </tr>
                             </thead>
@@ -204,3 +216,8 @@ $numDatos = $ejecutar->num_rows;
 </body>
 </html>
 
+<?php
+}else{
+    header("Location: ../../index.php");
+}
+?>
