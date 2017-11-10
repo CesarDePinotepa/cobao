@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-10-2017 a las 08:57:01
+-- Tiempo de generación: 10-11-2017 a las 10:00:50
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -41,8 +41,8 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`id`, `nombre`, `grado`, `clave`, `descripcion`) VALUES
-(1, 'Matematicas', '1', 'BAMA-I', 'Con descripciÃ³n'),
-(2, 'Quimica', '2', 'BAQU-II', 'AquÃ­ la descripciÃ³n');
+(1, 'Matematicas', '1', 'BAMA-I', '0'),
+(2, 'Quimica', '2', 'BAQU-II', '0');
 
 -- --------------------------------------------------------
 
@@ -104,6 +104,54 @@ INSERT INTO `estudiante` (`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `grupo`
+--
+
+CREATE TABLE `grupo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL,
+  `semestre` char(1) DEFAULT NULL,
+  `personal_id` int(11) DEFAULT NULL,
+  `estudiante_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `grupo`
+--
+
+INSERT INTO `grupo` (`id`, `nombre`, `semestre`, `personal_id`, `estudiante_id`) VALUES
+(1, '101', '1', NULL, NULL),
+(2, '102', '1', NULL, NULL),
+(3, '103', '1', NULL, NULL),
+(4, '301', '3', NULL, NULL),
+(5, '302', '3', NULL, NULL),
+(6, '303', '3', NULL, NULL),
+(7, '501', '5', NULL, NULL),
+(8, '503', '5', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materias_de_docente`
+--
+
+CREATE TABLE `materias_de_docente` (
+  `id` int(11) NOT NULL,
+  `curso_id` int(11) DEFAULT NULL,
+  `docente_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materias_de_docente`
+--
+
+INSERT INTO `materias_de_docente` (`id`, `curso_id`, `docente_id`) VALUES
+(5, 1, 5),
+(6, 2, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -123,7 +171,9 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `password`, `email`, `tipo`, `idper`) VALUES
 (1, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@admin.com', '0', '5'),
 (10, 'asdasasd as', '827ccb0eea8a706c4c34a16891f84e7b', 'asdas@asd.cd', '0', '4'),
-(11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', '6');
+(11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', '6'),
+(12, '20177000', 'be2bfcbdb285d5c53f419b1ce300c8ae', NULL, '2', '1'),
+(13, '20177001', 'a1c202acdbaf6e9f3a0983b907e06c93', NULL, '2', '2');
 
 --
 -- Índices para tablas volcadas
@@ -148,6 +198,18 @@ ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `grupo`
+--
+ALTER TABLE `grupo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `materias_de_docente`
+--
+ALTER TABLE `materias_de_docente`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -161,7 +223,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `docentes`
@@ -176,10 +238,22 @@ ALTER TABLE `estudiante`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `grupo`
+--
+ALTER TABLE `grupo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `materias_de_docente`
+--
+ALTER TABLE `materias_de_docente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
