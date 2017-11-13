@@ -15,16 +15,16 @@ require_once '../../plantillas/header.php'; ?>
         <div class="row">
             <div class="col-lg-12">
                 <?php include '../../control/mensajes.php'?>
-                <form action="../../control/actividades/guardar-a.php" method="post" class="form-horizontal" >
+                <form action="../../control/actividades/guardar-a.php" method="post" class="form-horizontal" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-md-1">Nombre</label>
                         <div class="col-md-5">
-                            <input type="text"  class="form-control" name="nomTxt"> </div>
+                            <input type="text"  required class="form-control" name="nomTxt"> </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-1">Fecha de entrega</label>
                         <div class="col-md-5">
-                            <input type="date"  class="form-control" name="ffin"> </div>
+                            <input type="date" required  class="form-control" name="ffin" min="<?php echo date("Y-m-d") ?>"> </div>
                     </div>
 
                     <div class="form-group">
@@ -32,6 +32,8 @@ require_once '../../plantillas/header.php'; ?>
                         <div class="col-md-5">
                             <input type="file"  class="form-control" name="arch"> </div>
                     </div>
+                    <input type="hidden" name="idcHdn" value="<?php echo $_GET['idc'] ?>">
+                    <input type="hidden" name="iddHdn" value="<?php echo $_GET['idd'] ?>">
                     <div class="col-sm-12">
                         <button class="btn btn-success">Guardar</button>
 
