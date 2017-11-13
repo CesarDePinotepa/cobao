@@ -5,8 +5,8 @@ if (isset($_POST['docSel']) && !empty($_POST['docSel'])) {
 
     $curso_id = $_POST['curChe'];
     for ($i=0;$i < count($curso_id);$i++){
-       $agregar = "INSERT INTO `materias_de_docente`(`id`, `curso_id`, `docente_id`) 
-                    VALUES (NULL,'$curso_id[$i]','$docente_id')";
+       $agregar = "INSERT INTO `materias_de_docente`(`id`, `curso_id`, `docente_id`,`estu_id`) 
+                    VALUES (NULL,'$curso_id[$i]','$docente_id',NULL )";
         $ejecutar2 = $conexion->query($agregar);
     }
 

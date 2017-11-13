@@ -5,15 +5,15 @@ if (isset($_POST['nomTxt']) && !empty($_POST['nomTxt'])) {
     $nombre = $_POST['nomTxt'];
 
     $grado = $_POST['graSel'];
-
+    $clave = date("Y").$nombre;
 
     $consultar_usuario = "SELECT `nombre` FROM `grupo` WHERE `nombre` = '$nombre'";
     $ejecutar = $conexion->query($consultar_usuario);
     $numDatos = $ejecutar->num_rows;
 
     if ($numDatos == 0) {
-        $agregar = "INSERT INTO `grupo`(`id`, `nombre`, `semestre`, `personal_id`, `estudiante_id`) 
-                    VALUES (NULL,'$nombre','$grado',NULL,NULL)";
+        $agregar = "INSERT INTO `grupo`(`id`, `nombre`, `semestre`, `clave`, `estudiante_id`) 
+                    VALUES (NULL,'$nombre','$grado','$clave',NULL)";
         $ejecutar2 = $conexion->query($agregar);
 
         if ($ejecutar2) {

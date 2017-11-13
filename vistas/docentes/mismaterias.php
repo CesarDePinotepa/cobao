@@ -56,7 +56,7 @@ if ($obj_ses->check_sess('userid')) {
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="#"><img src="../../img/cobaojj.png" style="height: 33px"></a>
             </div>
             <div class="navbar-header">
                 <a href="" class="navbar-brand">Plataforma Educativa - COBAO Plantel 48</a>

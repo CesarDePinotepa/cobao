@@ -46,7 +46,7 @@ if ($obj_ses->check_sess('userid')) {
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#"><img src="../../img/cobaojj.png" style="height: 33px"></a>
         </div>
         <div class="navbar-header">
             <a href="" class="navbar-brand">Plataforma Educativa - COBAO Plantel 48</a>
@@ -55,10 +55,10 @@ if ($obj_ses->check_sess('userid')) {
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Docente: <?php echo $obj_ses->get_value('nombre')?></a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo estudiante: <?php echo $obj_ses->get_value('nombre')?></a>
 
             </li>
-            <li><a href="../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="../../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
 
             </li>
         </ul>
@@ -69,7 +69,7 @@ if ($obj_ses->check_sess('userid')) {
 
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="menuEstudiante.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                        <a href="../../menuEstudiante.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                     </li>
                     <li>
                         <a href="mismaterias.php" class="active"><i class="fa fa-file-word-o fa-fw"></i>Mis materias</a>
@@ -92,7 +92,69 @@ if ($obj_ses->check_sess('userid')) {
 
     <div id="page-wrapper">
         <div class="container-fluid">
+        <?php
+        include "../../control/conexion.php";
+        $num_c = $obj_ses->get_value('nombre');
+        $comprobar = "SELECT  `estado`,`grado`,`id` FROM `estudiante` WHERE `num_control` = '$num_c'";
+        $ejecutar = $conexion->query($comprobar);
+        $edo = $ejecutar->fetch_assoc();
+        $grado = $edo['grado'];
+        $id = $edo['id'];
+        if ($edo['estado'] == 0){?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Grupos</h1>
+                </div>
+                <?php include '../../control/mensajes.php' ?>
+            </div>
 
+            <!-- ... Your content goes here ... -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Semestre</th>
+                                <th>Inscribirse</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $consulta_m = "SELECT * FROM `grupo` WHERE `semestre`  ='$grado'";
+                            $ejecutar2 = $conexion->query($consulta_m);
+                            $datos = $ejecutar2->fetch_assoc();
+
+                            $i = 0;
+                            while ($datos = $ejecutar2->fetch_assoc()) {
+                                $n = $datos['nombre'];
+
+                                echo "<tr>";
+                                echo "<td>". number_format( $i += 1) ."</td>";
+                                echo "<td> ". $datos['nombre']  ."</td>";
+                                echo "<td>". $datos['semestre']."</td>";
+                                echo "<td><a href='../../control/grupo/inscribir.php?id=$id&n=$n' onclick='return confirm(\"¿Inscribirse?\");' <i class='fa fa-edit fa-fw' aria-hidden='true'></i></a></td>";
+                                echo "<tr>";
+                            }
+
+                            $conexion->close();
+                            ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <?php
+
+        }else{
+            //
+
+        ?>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Cursos</h1>
@@ -111,19 +173,27 @@ if ($obj_ses->check_sess('userid')) {
                                 <th>Nombre</th>
                                 <th>Clave</th>
                                 <th>Semestre</th>
-                                <th>Eliminar</th>
+                                <th>Mis actividades</th>
+                                <th>Mis calificaciones</th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i = 0;
-                            while ($datos = $ejecutar->fetch_assoc()) {
-                                $id = $datos['id'];
+                            <?php
+                            $consulta_m = "SELECT * FROM `curso` WHERE `grado` = '$grado'";
+                            $ejecutar2 = $conexion->query($consulta_m);
+
+
+                            $i = 0;
+                            while ($datos = $ejecutar2->fetch_assoc()) {
+                                $idc= $datos['id'];
                                 echo "<tr>";
-                                echo "<td>". $i += 1 ."</td>";
-                                echo "<td> <a href='editar-c.php?id=$id'>". $datos['nombre']  ."</a></td>";
+                                echo "<td>". number_format($i += 1) ."</td>";
+                                echo "<td>". $datos['nombre']  ."</td>";
                                 echo "<td>". $datos['clave']."</td>";
                                 echo "<td>". $datos['grado'] ."</td>";
-                                echo "<td><a href='../../control/curso/eliminar-c.php?id=$id' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
+                                echo "<td><a href='misactividades.php?id=$id&idc=$idc'><i class='fa fa-pencil fa-fw' aria-hidden='true'></i></td>";
+                                echo "<td><a href=''><i class='fa fa-sticky-note fa-fw' aria-hidden='true'></i></td>";
                                 echo "<tr>";
                             }
 
@@ -136,7 +206,7 @@ if ($obj_ses->check_sess('userid')) {
 
                 </div>
             </div>
-
+            <?php }?>
         </div>
     </div>
 

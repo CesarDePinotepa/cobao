@@ -41,7 +41,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#"><img src="img/cobaojj.png" style="height: 33px"></a>
         </div>
         <div class="navbar-header">
             <a href="" class="navbar-brand">Plataforma Educativa - COBAO Plantel 48</a>
@@ -50,7 +50,7 @@
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo Docente: <?php echo $obj_ses->get_value('nombre')?></a>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i>Módulo estudiante: <?php echo $obj_ses->get_value('nombre')?></a>
 
             </li>
             <li><a href="../control/cerrarSesion.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>

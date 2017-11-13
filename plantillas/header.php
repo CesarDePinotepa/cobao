@@ -41,7 +41,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#"><img src="../../img/cobaojj.png" style="height: 33px"></a>
         </div>
         <div class="navbar-header">
             <a href="" class="navbar-brand">Plataforma Educativa - COBAO Plantel 48</a>
@@ -61,22 +61,12 @@
         <!-- Sidebar -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
-
                 <ul class="nav" id="side-menu">
                     <li>
                         <a href="../../menuDocente.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-users fa-fw"></i>Grupos <span
-                                    class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="../../vistas/grupos/listar.php">Listar</a>
-                            </li>
-                            <li>
-                                <a href="">Alta</a>
-                            </li>
-                        </ul>
+                        <a href="../../vistas/grupos/listar.php" class="active"><i class="fa fa-user-plus fa-fw"></i>Mis materias<span class="fa arrow"></span></a>
                     </li>
 
                     <li>
@@ -90,12 +80,3 @@
             </div>
         </div>
     </nav>
-
-    <!-- Page Content -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Bienvenido Usuario <?php echo $obj_ses->get_value('nombre') ?></h1>
-                </div>
-            </div>

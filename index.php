@@ -38,11 +38,12 @@
 </head>
 <body>
 
-<div id="wrapper">
+<div id="wrapper" style="background-color: #C4131B">
+    <img src="img/cobaojj.png" alt="">
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
+        <div class="container-fluid" >
+            <div class="row" >
                 <div class="col-lg-12">
                     <h1 class="page-header">Inicio de Sesión</h1>
                 </div>

@@ -26,8 +26,8 @@ if (isset($_POST['nomTxt']) && !empty($_POST['nomTxt'])) {
     $numDatos = $ejecutar->num_rows;
 
     if ($numDatos == 0) {
-        $agregar = "INSERT INTO `estudiante`(`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado`, `num_control`, `escuela_proce`, `email`, `fecha_nac`, `estado`) 
-                    VALUES (NULL,'$nombre','$apaterno','$amaterno','$curp','$grado','$num_control','$escuela','$email','$fecha_nac','1')";
+        $agregar = "INSERT INTO `estudiante`(`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado`, `num_control`, `escuela_proce`, `email`, `fecha_nac`, `estado`,`grupo`) 
+                    VALUES (NULL,'$nombre','$apaterno','$amaterno','$curp','$grado','$num_control','$escuela','$email','$fecha_nac','1',NULL)";
         $ejecutar2 = $conexion->query($agregar);
 
         if ($ejecutar2) {
