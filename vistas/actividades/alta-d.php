@@ -2,7 +2,10 @@
 require_once '../../librerias/Simple_sessions.php';
 $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
-require_once '../../plantillas/header.php'; ?>
+require_once '../../plantillas/header.php';
+$idc = $_GET['idc'];
+$idd = $_GET['idd'];
+?>
 
 <!-- Page Content -->
 <div id="page-wrapper">
@@ -32,8 +35,8 @@ require_once '../../plantillas/header.php'; ?>
                         <div class="col-md-5">
                             <input type="file"  class="form-control" name="arch"> </div>
                     </div>
-                    <input type="hidden" name="idcHdn" value="<?php echo $_GET['idc'] ?>">
-                    <input type="hidden" name="iddHdn" value="<?php echo $_GET['idd'] ?>">
+                    <input type="hidden" name="idcHdn" value="<?php echo $idc ?>">
+                    <input type="hidden" name="iddHdn" value="<?php echo $idd ?>">
                     <div class="col-sm-12">
                         <button class="btn btn-success">Guardar</button>
 

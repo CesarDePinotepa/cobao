@@ -9,6 +9,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     $ejecutar2 = $conexion->query($agregar);
 
     if ($ejecutar2) {
+        $actualizar = "";
+
         $bien = "Te inscribiste correctamente al grupo <b>$grupo</b>.";
         header("Location: ../../vistas/estudiante/mismaterias.php?bien=$bien");
     }else {

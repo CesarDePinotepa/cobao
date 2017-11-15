@@ -2,20 +2,6 @@
 require_once '../../librerias/Simple_sessions.php';
 $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
-    include "../../control/conexion.php";
-    $ide = $_GET['id'];
-    $idc = $_GET['idc'];
-
-//$consulta = "SELECT * FROM `actividades` WHERE `estu_id` ='$ide' AND`materia_id` = '$idc'";
-    $consulta = "SELECT * FROM `actividades` WHERE `materia_id` = '$idc'";
-    $ejecutar = $conexion->query($consulta);
-    $num = $ejecutar->num_rows;
-    //$reg = $ejecutar->fetch_assoc();
-
-    $consultam = "SELECT * FROM `curso` WHERE `id` = '$idc'";
-    $ejecutar2 = $conexion->query($consultam);
-    $regs = $ejecutar2->fetch_assoc();
-
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -83,10 +69,13 @@ if ($obj_ses->check_sess('userid')) {
 
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="menuEstudiante.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
+                            <a href="../../menuEstudiante.php" class="active"><i class="fa fa-tablet fa-fw"></i>Inicio</a>
                         </li>
                         <li>
                             <a href="mismaterias.php" class="active"><i class="fa fa-file-word-o fa-fw"></i>Mis materias</a>
+                        </li>
+                        <li>
+                            <a href="miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
                         </li>
 
                         <li>
@@ -102,22 +91,13 @@ if ($obj_ses->check_sess('userid')) {
         </nav>
 
         <!-- Page Content -->
+
+
         <div id="page-wrapper">
             <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-lg-12">
-                             <?php
-                             $consulta3 = "SELECT * FROM `actividades` WHERE `materia_id` = '$idc'";
-                             $ejecutar3 = $conexion->query($consulta3);
-                             $reg = $ejecutar3->fetch_assoc();
-                                if ($num == 0){
-                                    echo "<h2 class='page-header'>No hay actividades asignadas</h2>";
-                                }else {
-                                    echo "<h2 class='page-header'>Actividades de la materia: <b>".$regs['nombre']."</b></h2>";
-
-
-                                }?>
+                            <h1 class="page-header">Mis calificaciones</h1>
                         </div>
                         <?php include '../../control/mensajes.php' ?>
                     </div>
@@ -130,43 +110,32 @@ if ($obj_ses->check_sess('userid')) {
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nombre</th>
-                                        <th>Fecha Limite</th>
-                                        <?php
-                                        if ($reg['estado'] == 0){
-
-                                            echo "<th>Subir Archivo</th>
-                                            <th></th>";
-                                        }else{
-                                            echo "<th>Comentarios</th>
-                                                  <th>Calificación</th>";
-                                        }
-                                        ?>
                                         <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
+                                    <?php /*
+                                    $consulta_m = "SELECT * FROM `curso` WHERE `grado` = '$grado'";
+                                    $ejecutar2 = $conexion->query($consulta_m);
+
 
                                     $i = 0;
-                                    while ($datos = $ejecutar->fetch_assoc()) {
+                                    while ($datos = $ejecutar2->fetch_assoc()) {
+                                        $idc= $datos['id'];
                                         echo "<tr>";
-                                        echo "<td>". number_format( $i += 1) ."</td>";
-                                        echo "<td> <a href='".$datos['ruta']."' target='_blank'>". $datos['nombre']  ."</a></td>";
-                                        echo "<td>". $datos['fechaFin']."</td>";
-
-                                        if ($reg['estado'] == 0){
-                                            echo "<form action='' method='post' class='form-horizontal' enctype='multipart/form-data'>";
-                                            echo "<td><input type='file' name='miFile' value='Subir'> </td>";
-                                            echo "<td><button class='btn btn-success'>Guardar</button> </td>";
-                                            echo "</form>";
-                                        }else {
-                                            echo "<td>". $datos['calificacion_id']."</td>";
-                                        }
-                                        echo "</tr>";
+                                        echo "<td>". number_format($i += 1) ."</td>";
+                                        echo "<td>". $datos['nombre']  ."</td>";
+                                        echo "<td>". $datos['clave']."</td>";
+                                        echo "<td>". $datos['grado'] ."</td>";
+                                        echo "<td><a href='misactividades.php?id=$id&idc=$idc'><i class='fa fa-pencil fa-fw' aria-hidden='true'></i></td>";
+                                        echo "<tr>";
                                     }
 
-                                    $conexion->close();
+                                    $conexion->close();*/
                                     ?>
 
                                     </tbody>
@@ -175,7 +144,6 @@ if ($obj_ses->check_sess('userid')) {
 
                         </div>
                     </div>
-
             </div>
         </div>
 

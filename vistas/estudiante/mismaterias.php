@@ -74,7 +74,9 @@ if ($obj_ses->check_sess('userid')) {
                     <li>
                         <a href="mismaterias.php" class="active"><i class="fa fa-file-word-o fa-fw"></i>Mis materias</a>
                     </li>
-
+                    <li>
+                        <a href="miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
+                    </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
@@ -103,7 +105,7 @@ if ($obj_ses->check_sess('userid')) {
         if ($edo['estado'] == 0){?>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Grupos</h1>
+                    <h2 class="page-header">Inscribirse en un grupo</h2>
                 </div>
                 <?php include '../../control/mensajes.php' ?>
             </div>
@@ -157,7 +159,7 @@ if ($obj_ses->check_sess('userid')) {
         ?>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Cursos</h1>
+                    <h1 class="page-header">Mis materias</h1>
                 </div>
                 <?php include '../../control/mensajes.php' ?>
             </div>
@@ -174,7 +176,6 @@ if ($obj_ses->check_sess('userid')) {
                                 <th>Clave</th>
                                 <th>Semestre</th>
                                 <th>Mis actividades</th>
-                                <th>Mis calificaciones</th>
 
                             </tr>
                             </thead>
@@ -193,7 +194,6 @@ if ($obj_ses->check_sess('userid')) {
                                 echo "<td>". $datos['clave']."</td>";
                                 echo "<td>". $datos['grado'] ."</td>";
                                 echo "<td><a href='misactividades.php?id=$id&idc=$idc'><i class='fa fa-pencil fa-fw' aria-hidden='true'></i></td>";
-                                echo "<td><a href=''><i class='fa fa-sticky-note fa-fw' aria-hidden='true'></i></td>";
                                 echo "<tr>";
                             }
 

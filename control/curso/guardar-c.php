@@ -5,7 +5,7 @@ if (isset($_POST['nomTxt']) && !empty($_POST['nomTxt'])) {
     $nombre = $_POST['nomTxt'];
     $clave = $_POST['claTxt'];
     $grado = $_POST['graSel'];
-    $descripcion = $_POST['desTxt'];
+    $descripcion = '0';
 
     $consultar_usuario = "SELECT `clave` FROM `curso` WHERE `clave` = '$clave'";
     $ejecutar = $conexion->query($consultar_usuario);

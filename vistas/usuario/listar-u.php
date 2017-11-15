@@ -122,11 +122,11 @@ if ($obj_ses->check_sess('userid')) {
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-file-excel-o fa-fw"></i>Evaluaciones</a>
-                    </li>
+                        <a href="../grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar maerias</a>
+                    </li><!--
                     <li>
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
@@ -186,8 +186,10 @@ if ($obj_ses->check_sess('userid')) {
 
                                 if ($datos['tipo'] ==0 ){
                                     echo "<td> Administrador</td>";
-                                }else{
-                                    echo "<td>Docente</td>";
+                                }elseif ($datos['tipo'] ==1){
+                                    echo "<td> Docente</td>";
+                                } else{
+                                    echo "<td>Estudiante</td>";
                                 }
                                 echo "<td><a href='' onclick='return confirm(\"¿Eliminar?\");' <i class='fa fa-trash-o fa-fw' aria-hidden='true'></i></a></td>";
                                 echo "<tr>";

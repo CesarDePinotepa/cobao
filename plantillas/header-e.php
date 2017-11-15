@@ -69,6 +69,9 @@
                     <li>
                         <a href="vistas/estudiante/mismaterias.php" class="active"><i class="fa fa-file-word-o fa-fw"></i>Mis materias</a>
                     </li>
+                    <li>
+                        <a href="vistas/estudiante/miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
+                    </li>
 
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>

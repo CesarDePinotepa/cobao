@@ -93,7 +93,7 @@ if ($obj_ses->check_sess('userid')) {
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Bienvenido Usuario <?php echo $obj_ses->get_value('nombre') ?></h1>
+                        <h1 class="page-header">Bienvenido: <?php echo $obj_ses->get_value('nombre') ?></h1>
                     </div>
                 </div>
 

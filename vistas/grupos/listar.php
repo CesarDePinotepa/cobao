@@ -50,7 +50,7 @@ if ($obj_ses->check_sess('userid')) {
                             echo "<td> <a href=''>". $regs['nombre']  ."</a></td>";
                             echo "<td>". $regs['grado']."</td>";
                             echo "<td><a href='../actividades/alta-d.php?idc=$idc&idd=$idd' <i class='fa fa-plus-circle fa-fw' aria-hidden='true'></i></a></td>";
-                            echo "<td><a href='' <i class='fa fa-eye fa-fw' aria-hidden='true'></i></a></td>";
+                            echo "<td><a href='../actividades/listar-d.php?idc=$idc&idd=$idd' <i class='fa fa-eye fa-fw' aria-hidden='true'></i></a></td>";
                             echo "<td><a href='' <i class='fa fa-edit fa-fw' aria-hidden='true'></i></a></td>";
                             echo "<tr>";
                         }

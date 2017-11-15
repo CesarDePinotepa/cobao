@@ -2,8 +2,8 @@
 include "../conexion.php";
 $titulo = $_POST['nomTxt'];
 $fecha = $_POST['ffin'];
-$idc = $_POST['idc'];
-$idd = $_POST['idd'];
+$idc = $_POST['idcHdn'];
+$idd = $_POST['iddHdn'];
 
 $nombre = $_FILES['arch']['name'];
 $tipo_archivo = $_FILES['arch']['type'];
@@ -21,13 +21,14 @@ if ($nombre!=''){
 
     }else{
         if(move_uploaded_file($_FILES['arch']['tmp_name'],$ruta_del_archivo)){
-            $insertar = "INSERT INTO `actividades`(`id`, `nombre`, `descripcion`, `fechaIni`, `fechaFin`, `ruta`, 
+            $insertar = "INSERT INTO `actividades`(`id`, `nombre`, `descripcion`, `ruta2`, `fechaFin`, `ruta`, 
                           `estu_id`, `materia_id`, `docente_id`, `calificacion_id`, `estado`)
-                           VALUES (NULL,'$nombre',NULL,NULL,'$fecha','$ruta_del_archivo',NULL,
+                           VALUES (NULL,'$titulo',NULL,NULL,'$fecha','$ruta_del_archivo',NULL,
                            '$idc','$idd',NULL,'0')";
             $ejecutar = $conexion->query($insertar);
 
             if ($ejecutar){
+
                 $bien = "La actividad se subió correctamente";
                 header("Location: ../../vistas/actividades/alta-d.php?idc=$idc&bien=$bien");
             }else{
