@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2017 a las 10:00:50
+-- Tiempo de generación: 15-11-2017 a las 10:39:42
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -25,6 +25,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `actividades`
+--
+
+CREATE TABLE `actividades` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) DEFAULT NULL,
+  `descripcion` text,
+  `ruta2` varchar(100) DEFAULT NULL,
+  `fechaFin` date DEFAULT NULL,
+  `ruta` varchar(100) DEFAULT NULL,
+  `estu_id` int(11) DEFAULT NULL,
+  `materia_id` int(11) DEFAULT NULL,
+  `docente_id` int(11) DEFAULT NULL,
+  `calificacion_id` int(11) DEFAULT NULL,
+  `estado` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `actividades`
+--
+
+INSERT INTO `actividades` (`id`, `nombre`, `descripcion`, `ruta2`, `fechaFin`, `ruta`, `estu_id`, `materia_id`, `docente_id`, `calificacion_id`, `estado`) VALUES
+(1, 'Reporte 1', NULL, NULL, '2017-11-30', '../../archivos/CÃ©sarCV.pdf', NULL, 3, 8, NULL, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificacion`
+--
+
+CREATE TABLE `calificacion` (
+  `id` int(11) NOT NULL,
+  `actividad_id` int(11) DEFAULT NULL,
+  `materia_id` int(11) DEFAULT NULL,
+  `estu_id` int(11) DEFAULT NULL,
+  `calificacion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `curso`
 --
 
@@ -33,7 +74,7 @@ CREATE TABLE `curso` (
   `nombre` varchar(30) DEFAULT NULL,
   `grado` char(1) DEFAULT NULL,
   `clave` varchar(15) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL
+  `descripcion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -41,8 +82,10 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`id`, `nombre`, `grado`, `clave`, `descripcion`) VALUES
-(1, 'Matematicas', '1', 'BAMA-I', '0'),
-(2, 'Quimica', '2', 'BAQU-II', '0');
+(1, 'Matematicas', '1', 'BAMA-I', 0),
+(2, 'Quimica', '2', 'BAQU-II', 0),
+(3, 'InformÃ¡tica ', '1', 'ESIN-I', 0),
+(4, 'Historia Universal', '3', 'CSHIS-III', 0);
 
 -- --------------------------------------------------------
 
@@ -70,7 +113,8 @@ CREATE TABLE `docentes` (
 INSERT INTO `docentes` (`id`, `nombre`, `apaterno`, `amaterno`, `direccion`, `telefono`, `rfc`, `area`, `curp`, `email`) VALUES
 (5, 'Leonel', 'Messi', 'A', 'Rosario', '7876543567', 'CCCC 234578 K90', 'Informatica', '', 'messi@contacto.com'),
 (6, 'Javier', 'Blake', 'C', 'Ciudad de MÃ©xico', '89876543456', 'BJBJ123456L90', 'MÃºsica', 'BBBB 444444 HDFKSO', 'javier@contacto.com'),
-(7, 'Juan', 'Roman', 'Riquelme', 'Buenos Aires', '878787888999', 'ASDF1234456K98', 'MatemÃ¡ticas', '', 'el@contacto.com');
+(7, 'Juan', 'Roman', 'Riquelme', 'Buenos Aires', '878787888999', 'ASDF1234456K98', 'MatemÃ¡ticas', '', 'el@contacto.com'),
+(8, 'Ismel', 'Fuentes ', 'de Garay', 'Col. Napoles, CDMX', '55763248', 'FUGI751113L09', 'MÃºsica', 'FUGI751113HDFJS034', 'tito@contacto.com');
 
 -- --------------------------------------------------------
 
@@ -89,17 +133,18 @@ CREATE TABLE `estudiante` (
   `escuela_proce` varchar(30) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `fecha_nac` date DEFAULT NULL,
-  `estado` char(1) DEFAULT NULL
+  `estado` char(1) DEFAULT NULL,
+  `grupo` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `estudiante`
 --
 
-INSERT INTO `estudiante` (`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado`, `num_control`, `escuela_proce`, `email`, `fecha_nac`, `estado`) VALUES
-(1, 'Emma', 'Watson', 'de Bernal', 'WABE890708MLODHS09', '1', '20177000', 'Secundaria Uno', 'emma@cobao.com', '1989-08-09', '1'),
-(2, 'Andres', 'Iniesta', 'Abc', 'INAA811209HJDLSM03', '2', '20177001', 'Secundaria Uno', 'andres@cobao.com', '1988-08-09', '1'),
-(3, 'asdas', 'askdmsa', 'daspdpsao', 'dapsdkapsod', '1', '20177002', 'asdapd', 'adas@adas', '1999-09-09', '0');
+INSERT INTO `estudiante` (`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado`, `num_control`, `escuela_proce`, `email`, `fecha_nac`, `estado`, `grupo`) VALUES
+(1, 'Emma', 'Watson', 'de Bernal', 'WABE890708MLODHS09', '1', '20177000', 'Secundaria Uno', 'emma@cobao.com', '1989-08-09', '1', '102'),
+(2, 'Andres', 'Iniesta', 'Abc', 'INAA811209HJDLSM03', '2', '20177001', 'Secundaria Uno', 'andres@cobao.com', '1988-08-09', '0', '201'),
+(3, 'asdas', 'askdmsa', 'daspdpsao', 'dapsdkapsod', '1', '20177002', 'asdapd', 'adas@adas', '1999-09-09', '0', '102');
 
 -- --------------------------------------------------------
 
@@ -111,7 +156,7 @@ CREATE TABLE `grupo` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) DEFAULT NULL,
   `semestre` char(1) DEFAULT NULL,
-  `personal_id` int(11) DEFAULT NULL,
+  `clave` varchar(10) DEFAULT NULL,
   `estudiante_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -119,15 +164,15 @@ CREATE TABLE `grupo` (
 -- Volcado de datos para la tabla `grupo`
 --
 
-INSERT INTO `grupo` (`id`, `nombre`, `semestre`, `personal_id`, `estudiante_id`) VALUES
-(1, '101', '1', NULL, NULL),
-(2, '102', '1', NULL, NULL),
-(3, '103', '1', NULL, NULL),
-(4, '301', '3', NULL, NULL),
-(5, '302', '3', NULL, NULL),
-(6, '303', '3', NULL, NULL),
-(7, '501', '5', NULL, NULL),
-(8, '503', '5', NULL, NULL);
+INSERT INTO `grupo` (`id`, `nombre`, `semestre`, `clave`, `estudiante_id`) VALUES
+(1, '101', '1', '2017101', NULL),
+(2, '102', '1', '2017102', NULL),
+(3, '103', '1', '2017103', NULL),
+(4, '301', '3', '2017301', NULL),
+(5, '302', '3', '2017302', NULL),
+(6, '303', '3', '2017303', NULL),
+(7, '501', '5', '2017501', NULL),
+(8, '503', '5', '2017503', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,16 +183,19 @@ INSERT INTO `grupo` (`id`, `nombre`, `semestre`, `personal_id`, `estudiante_id`)
 CREATE TABLE `materias_de_docente` (
   `id` int(11) NOT NULL,
   `curso_id` int(11) DEFAULT NULL,
-  `docente_id` int(11) DEFAULT NULL
+  `docente_id` int(11) DEFAULT NULL,
+  `estu_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `materias_de_docente`
 --
 
-INSERT INTO `materias_de_docente` (`id`, `curso_id`, `docente_id`) VALUES
-(5, 1, 5),
-(6, 2, 5);
+INSERT INTO `materias_de_docente` (`id`, `curso_id`, `docente_id`, `estu_id`) VALUES
+(5, 1, 5, NULL),
+(6, 2, 5, NULL),
+(7, 3, 8, NULL),
+(8, 4, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,11 +221,24 @@ INSERT INTO `usuario` (`id`, `nombre`, `password`, `email`, `tipo`, `idper`) VAL
 (10, 'asdasasd as', '827ccb0eea8a706c4c34a16891f84e7b', 'asdas@asd.cd', '0', '4'),
 (11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', '6'),
 (12, '20177000', 'be2bfcbdb285d5c53f419b1ce300c8ae', NULL, '2', '1'),
-(13, '20177001', 'a1c202acdbaf6e9f3a0983b907e06c93', NULL, '2', '2');
+(13, '20177001', 'a1c202acdbaf6e9f3a0983b907e06c93', NULL, '2', '2'),
+(14, 'Fuentes  de Garay Ismel', 'be4d6b9a0dc0f06a87c3c68daa0b1e07', 'tito@contacto.com', '1', '8');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `actividades`
+--
+ALTER TABLE `actividades`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `curso`
@@ -220,16 +281,28 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `actividades`
+--
+ALTER TABLE `actividades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `docentes`
 --
 ALTER TABLE `docentes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -241,19 +314,19 @@ ALTER TABLE `estudiante`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `materias_de_docente`
 --
 ALTER TABLE `materias_de_docente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
