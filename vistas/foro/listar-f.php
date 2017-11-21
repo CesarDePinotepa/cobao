@@ -2,13 +2,16 @@
 require_once '../../librerias/Simple_sessions.php';
 $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
-    include "../../control/conexion.php";
     $idu = $obj_ses->get_value('userid');
-    $sql = "SELECT  `idper` FROM `usuario` WHERE `id` = '$idu'";
-    $ejecutar4 = $conexion->query($sql);
-    $ureg = $ejecutar4->fetch_assoc();
-    $ide = $ureg['idper'];
+    $consulta = "SELECT  `idper` FROM `usuario` WHERE `id` = '$idu'";
+    $ejecutar = $conexion->query($consulta);
+    $idreg = $ejecutar->fetch_assoc();
+    $ide = $idreg['idper'];
 
+    $consulta2 = "SELECT * FROM `estudiante` WHERE `id` = '$ide'";
+    $ejecutar2 = $conexion->query($consulta2);
+    $datos = $ejecutar2->fetch_assoc();
+    $grado = $datos['grado'];
     ?>
     <!DOCTYPE html>
     <html lang="es">
@@ -84,12 +87,11 @@ if ($obj_ses->check_sess('userid')) {
                         <li>
                             <a href="miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
                         </li>
-
                         <li>
-                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                            <a href="listar-f-a.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
-                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
+                            <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -102,57 +104,53 @@ if ($obj_ses->check_sess('userid')) {
 
         <div id="page-wrapper">
             <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Mis calificaciones</h1>
-                        </div>
-                        <?php include '../../control/mensajes.php' ?>
+                <?php
+                include "../../control/conexion.php";
+                $num_c = $obj_ses->get_value('nombre');
+                $comprobar = "SELECT * FROM `foro_foro` WHERE `foro` = '$grado'";
+                $ejecutar = $conexion->query($comprobar);
+                $edo = $ejecutar->fetch_assoc();
+                ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Temas del foro</h2>
                     </div>
+
+                </div>
 
                     <!-- ... Your content goes here ... -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
+                                <a href="">Categorías</a>
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Actividad</th>
-                                        <th>Materia</th>
-                                        <th>Comentario</th>
-                                        <th>Calificación</th>
-
+                                        <th>Tema</th>
+                                        <th>Último mensaje</th>
+                                        <th>Respuestas</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                    $consulta_m = "SELECT * FROM `calificacion` WHERE `estu_id` ='$ide'";
+                                    <?php /*
+                                    $consulta_m = "SELECT * FROM `grupo` WHERE `semestre`  ='$grado'";
                                     $ejecutar2 = $conexion->query($consulta_m);
+                                    $datos = $ejecutar2->fetch_assoc();
 
                                     $i = 0;
                                     while ($datos = $ejecutar2->fetch_assoc()) {
-                                        $idc = $datos['id'];
-                                        $ida = $datos['actividad_id'];
+                                        $n = $datos['nombre'];
+
                                         echo "<tr>";
-                                        echo "<td>". number_format($i += 1) ."</td>";
-
-                                        $traera = "SELECT * FROM `actividades` WHERE `id` = '$ida'";
-                                        $ejecutar = $conexion->query($traera);
-                                        $regs = $ejecutar->fetch_assoc();
-                                        echo "<td>". $regs['nombre']  ."</td>";
-
-                                        $idm = $regs['materia_id'];
-                                        $traerm = "SELECT * FROM `curso` WHERE `id` = '$idm'";
-                                        $ejecutar3 = $conexion->query($traerm);
-                                        $regm = $ejecutar3->fetch_assoc();
-                                        echo "<td>". $regm['nombre']."</td>";
-
-                                        echo "<td>". $regs['descripcion'] ."</td>";
-                                        echo "<td>". $datos['calificacion'] ."</td>";
+                                        echo "<td>". number_format( $i += 1) ."</td>";
+                                        echo "<td>". $datos['nombre'] ."</td>";
+                                        echo "<td>". $datos['semestre']."</td>";
+                                        echo "<td><a href='../../control/grupo/inscribir.php?id=$id&n=$n' onclick='return confirm(\"¿Inscribirse?\");' <i class='fa fa-edit fa-fw' aria-hidden='true'></i></a></td>";
                                         echo "<tr>";
                                     }
 
-                                    $conexion->close();
+                                    $conexion->close();*/
                                     ?>
 
                                     </tbody>

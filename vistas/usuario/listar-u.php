@@ -128,7 +128,7 @@ if ($obj_ses->check_sess('userid')) {
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
                     </li>-->
                     <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                        <a href="../foro/listar-f-a.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span

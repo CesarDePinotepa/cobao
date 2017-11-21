@@ -4,10 +4,10 @@ $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
     include "../../control/conexion.php";
     $idu = $obj_ses->get_value('userid');
-    $sql = "SELECT  `idper` FROM `usuario` WHERE `id` = '$idu'";
-    $ejecutar4 = $conexion->query($sql);
-    $ureg = $ejecutar4->fetch_assoc();
-    $ide = $ureg['idper'];
+
+    $traeru = "SELECT * FROM `usuario` WHERE `id` ='$idu'";
+    $ejecutar = $conexion->query($traeru);
+    $datos = $ejecutar->fetch_assoc();
 
     ?>
     <!DOCTYPE html>
@@ -89,7 +89,7 @@ if ($obj_ses->check_sess('userid')) {
                             <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
-                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
+                            <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -98,74 +98,55 @@ if ($obj_ses->check_sess('userid')) {
         </nav>
 
         <!-- Page Content -->
-
-
         <div id="page-wrapper">
             <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">Mis calificaciones</h1>
-                        </div>
-                        <?php include '../../control/mensajes.php' ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Cambiar contreaseña del usuario: <b><?php echo $datos['nombre'] ?></b> </h2>
                     </div>
-
-                    <!-- ... Your content goes here ... -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Actividad</th>
-                                        <th>Materia</th>
-                                        <th>Comentario</th>
-                                        <th>Calificación</th>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    $consulta_m = "SELECT * FROM `calificacion` WHERE `estu_id` ='$ide'";
-                                    $ejecutar2 = $conexion->query($consulta_m);
-
-                                    $i = 0;
-                                    while ($datos = $ejecutar2->fetch_assoc()) {
-                                        $idc = $datos['id'];
-                                        $ida = $datos['actividad_id'];
-                                        echo "<tr>";
-                                        echo "<td>". number_format($i += 1) ."</td>";
-
-                                        $traera = "SELECT * FROM `actividades` WHERE `id` = '$ida'";
-                                        $ejecutar = $conexion->query($traera);
-                                        $regs = $ejecutar->fetch_assoc();
-                                        echo "<td>". $regs['nombre']  ."</td>";
-
-                                        $idm = $regs['materia_id'];
-                                        $traerm = "SELECT * FROM `curso` WHERE `id` = '$idm'";
-                                        $ejecutar3 = $conexion->query($traerm);
-                                        $regm = $ejecutar3->fetch_assoc();
-                                        echo "<td>". $regm['nombre']."</td>";
-
-                                        echo "<td>". $regs['descripcion'] ."</td>";
-                                        echo "<td>". $datos['calificacion'] ."</td>";
-                                        echo "<tr>";
-                                    }
-
-                                    $conexion->close();
-                                    ?>
-
-                                    </tbody>
-                                </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?php include '../../control/mensajes.php'?>
+                        <form action="../../control/estudiante/updateContra.php" method="post" class="form-horizontal" >
+                            <div class="form-group">
+                                <label class="col-md-1">Número de control</label>
+                                <div class="col-md-5">
+                                    <input type="text" disabled  class="form-control " name="nomTxt" value="<?php echo $datos['nombre'] ?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-1">Contraseña Actual</label>
+                                <div class="col-md-5">
+                                    <input type="password"  class="form-control" name="conPas" required>
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="form-group">
+                                <label class="col-md-1">Nueva Contraseña</label>
+                                <div class="col-md-5">
+                                    <input type="password"  class="form-control" name="conPasN" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-1">Confirme Contraseña</label>
+                                <div class="col-md-5">
+                                    <input type="password"  class="form-control" name="conPasC" required>
+                                </div>
+                            </div>
+                            <input type="hidden" name="idHdn" value="<?php echo $idu ?>">
+                            <div class="col-sm-12">
+                                <button class="btn btn-success">Cambiar</button>
+
+                            </div>
+                        </form>
+
                     </div>
+                </div>
             </div>
         </div>
 
-    </div>
-    </div>
 
     </div>
 

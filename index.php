@@ -56,7 +56,7 @@
                         <div class="form-group">
                             <label class="col-md-1">Email</label>
                             <div class="col-md-5">
-                                <input type="text"  class="form-control" name="usrTxt"> </div>
+                                <input type="text"  class="form-control" name="usrTxt" autofocus> </div>
 
                         </div>
                         <div class="form-group">

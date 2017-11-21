@@ -112,12 +112,12 @@
                     </li>
                     <li>
                         <a href="../../vistas/grupos/asignar.php" class="active"><i class="fa fa-repeat fa-fw"></i>Asignar materias</a>
-                    </li>
+                    </li><!--
                     <li>
                         <a href="#" class="active"><i class="fa fa-file-text fa-fw"></i>Cuestionarios</a>
-                    </li>
+                    </li>--->
                     <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                        <a href="../vistas/foro/listar-f-a.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-user fa-fw"></i>Usuarios <span

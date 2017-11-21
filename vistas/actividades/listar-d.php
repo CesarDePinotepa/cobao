@@ -24,7 +24,7 @@ $sem = $reg['grado'];
         <?php
         ?>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>

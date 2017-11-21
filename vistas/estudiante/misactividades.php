@@ -88,6 +88,9 @@ if ($obj_ses->check_sess('userid')) {
                         <li>
                             <a href="mismaterias.php" class="active"><i class="fa fa-file-word-o fa-fw"></i>Mis materias</a>
                         </li>
+                        <li>
+                            <a href="miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
+                        </li>
 
                         <li>
                             <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
@@ -115,8 +118,6 @@ if ($obj_ses->check_sess('userid')) {
                                     echo "<h2 class='page-header'>No hay actividades asignadas</h2>";
                                 }else {
                                     echo "<h2 class='page-header'>Actividades de la materia: <b>".$regs['nombre']."</b></h2>";
-
-
                                 }?>
                         </div>
                         <?php include '../../control/mensajes.php' ?>
@@ -150,18 +151,40 @@ if ($obj_ses->check_sess('userid')) {
 
                                     $i = 0;
                                     while ($datos = $ejecutar->fetch_assoc()) {
+                                        $ida = $datos['id'];
                                         echo "<tr>";
                                         echo "<td>". number_format( $i += 1) ."</td>";
                                         echo "<td> <a href='".$datos['ruta']."' target='_blank'>". $datos['nombre']  ."</a></td>";
                                         echo "<td>". $datos['fechaFin']."</td>";
+                                        $fechaActual = strtotime(date("Y-m-d"));
+                                        $fechaEntrada = strtotime($reg['fechaFin']);
+                                        $quitar = ($fechaActual > $fechaEntrada) ? "Ya paso" : "Aun disponible";
 
-                                        if ($reg['estado'] == 0){
-                                            echo "<form action='' method='post' class='form-horizontal' enctype='multipart/form-data'>";
-                                            echo "<td><input type='file' name='miFile' value='Subir'> </td>";
-                                            echo "<td><button class='btn btn-success'>Guardar</button> </td>";
-                                            echo "</form>";
+                                        if ($reg['estado'] == 0 ){
+                                            if ($fechaActual > $fechaEntrada){
+                                                echo "<td>La fecha de entrega ya pasó.</td>";
+                                            }else {
+                                                echo "<form action='../../control/actividades/guardarXes.php' method='post' class='form-horizontal' enctype='multipart/form-data'>";
+                                                echo "<td><input type='file' name='arch' value='Subir'> </td>";
+                                                echo "<td><button class='btn btn-success'>Guardar</button> </td>";
+                                                echo "<input type='hidden' name='idaHdn' value='$ida'>";
+                                                echo "<input type='hidden' name='idcHdn' value='$idc'>";
+                                                echo "<input type='hidden' name='ideHdn' value='$ide'>";
+                                                echo "</form>";
+                                            }
                                         }else {
-                                            echo "<td>". $datos['calificacion_id']."</td>";
+                                            $traerc = "SELECT `calificacion` FROM `calificacion` 
+                                                       WHERE `actividad_id`= '$ida' AND `estu_id` = '$ide'";
+                                            $ejecutar4 = $conexion->query($traerc);
+                                            $userr = $ejecutar4->fetch_assoc();
+
+                                            echo "<td>". $datos['descripcion']."</td>";
+                                            if ($userr['calificacion'] <=5){
+                                                echo "<td style='background-color: red; color: white;'>". $userr['calificacion']."</td>";
+                                            }else{
+                                                echo "<td style='background-color: green;color: white; ' >". $userr['calificacion']."</td>";
+                                            }
+
                                         }
                                         echo "</tr>";
                                     }
