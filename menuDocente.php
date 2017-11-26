@@ -76,7 +76,7 @@ if ($obj_ses->check_sess('userid')) {
                         </li>
 
                         <li>
-                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                            <a href="vistas/foro/listar-f-d.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
                             <a href="vistas/docentes/cambiarPass.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>

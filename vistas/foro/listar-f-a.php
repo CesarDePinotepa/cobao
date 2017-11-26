@@ -159,8 +159,8 @@ if ($obj_ses->check_sess('userid')) {
         <div id="page-wrapper">
             <div class="container-fluid">
                 <?php
-                $comprobar = "SELECT * FROM `foro_temas` WHERE `foro` = '$grado'";
-                $ejecutar = $conexion->query($comprobar);
+                $comprobar = "SELECT * FROM `foro_foro` WHERE `foro` = '$grado'";
+                $ejecutar3 = $conexion->query($comprobar);
                 ?>
                 <div class="row">
                     <div class="col-lg-12">
@@ -186,12 +186,12 @@ if ($obj_ses->check_sess('userid')) {
                                 <tbody>
                                 <?php
                                     $i = 0;
-                                    while ($datos = $ejecutar->fetch_assoc()) {
-                                        $id = $datos['id_foro'];
+                                    while ($regs = $ejecutar3->fetch_assoc()) {
+                                        $id = $regs['id_foro'];
                                         echo "<tr>";
                                         echo "<td>". number_format( $i += 1) ."</td>";
-                                        echo "<td>". $datos['tema'] ."</td>";
-                                        echo "<td>". $datos['tema']."</td>";
+                                        echo "<td>". $regs['tema'] ."</td>";
+                                        echo "<td>". $regs['tema']."</td>";
                                         echo "<td><a href='../../control/grupo/inscribir.php?id=$id&n=$n' onclick='return confirm(\"¿Inscribirse?\");' <i class='fa fa-edit fa-fw' aria-hidden='true'></i></a></td>";
                                         echo "<tr>";
                                     }

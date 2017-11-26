@@ -74,7 +74,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                        <a href="vistas/foro/listar-f-e.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
                     <li>
                         <a href="vistas/estudiante/cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>

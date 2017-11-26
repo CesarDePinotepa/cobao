@@ -4,9 +4,10 @@ $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
     include "../../control/conexion.php";
     $idu = $obj_ses->get_value('userid');
+    $id = $_GET['id'];
 
-    $traeru = "SELECT * FROM `usuario` WHERE `id` ='$idu'";
-    $ejecutar = $conexion->query($traeru);
+    $consulta = "SELECT * FROM `foro_foro` WHERE `id_foro` = '$id'";
+    $ejecutar = $conexion->query($consulta);
     $datos = $ejecutar->fetch_assoc();
 
     ?>
@@ -86,10 +87,10 @@ if ($obj_ses->check_sess('userid')) {
                         </li>
 
                         <li>
-                            <a href="../foro/listar-f-e.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
-                            <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
+                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -98,55 +99,49 @@ if ($obj_ses->check_sess('userid')) {
         </nav>
 
         <!-- Page Content -->
+
+
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Cambiar contreaseña del usuario: <b><?php echo $datos['nombre'] ?></b> </h2>
+                    <div class="col-lg-6">
+                        <h2 class="page-header">Responder a <b><?php echo $datos['foro']?></b></h2>
                     </div>
                 </div>
+                <!-- ... Your content goes here ... -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php include '../../control/mensajes.php'?>
-                        <form action="../../control/estudiante/updateContra.php" method="post" class="form-horizontal" >
-                            <div class="form-group">
-                                <label class="col-md-1">Número de control</label>
-                                <div class="col-md-5">
-                                    <input type="text" disabled  class="form-control " name="nomTxt" value="<?php echo $datos['nombre'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-1">Contraseña Actual</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPas" required>
-                                </div>
-                            </div>
+                        <?php include "../../control/mensajes.php"; ?>
+                        <form action="../../control/foro/guardar-res-e.php" method="post" class="form-horizontal" >
 
                             <div class="form-group">
-                                <label class="col-md-1">Nueva Contraseña</label>
+                                <label class="col-md-1">Descripción</label>
                                 <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasN" required>
+                                    <textarea name="msjTxa" disabled id="" cols="70" rows="5" ><?php echo $datos['descripcion'] ?></textarea>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label class="col-md-1">Confirme Contraseña</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasC" required>
-                                </div>
                             </div>
-                            <input type="hidden" name="idHdn" value="<?php echo $idu ?>">
+                            <div class="form-group">
+                                <label class="col-md-1">Respuesta</label>
+                                <div class="col-md-5">
+                                    <textarea name="resTxa"  id="" cols="70" rows="5" required ></textarea>
+                                </div>
+
+                            </div>
+                            <input type="hidden" name="idHdn" value="<?php echo $id ?>">
+                            <input type="hidden" name="iduHdn" value="<?php echo $idu ?>">
                             <div class="col-sm-12">
-                                <button class="btn btn-success">Cambiar</button>
+                                <button class="btn btn-success">Responder</button>
 
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+    </div>
 
     </div>
 

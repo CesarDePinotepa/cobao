@@ -78,7 +78,7 @@ if ($obj_ses->check_sess('userid')) {
                         <a href="miscalificaciones.php" class="active"><i class="fa fa-sticky-note fa-fw"></i>Mis calificaciones</a>
                     </li>
                     <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                        <a href="../foro/listar-f-e.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                     </li>
                     <li>
                         <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>

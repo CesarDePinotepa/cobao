@@ -5,9 +5,6 @@ if ($obj_ses->check_sess('userid')) {
     include "../../control/conexion.php";
     $idu = $obj_ses->get_value('userid');
 
-    $traeru = "SELECT * FROM `usuario` WHERE `id` ='$idu'";
-    $ejecutar = $conexion->query($traeru);
-    $datos = $ejecutar->fetch_assoc();
 
     ?>
     <!DOCTYPE html>
@@ -86,10 +83,10 @@ if ($obj_ses->check_sess('userid')) {
                         </li>
 
                         <li>
-                            <a href="../foro/listar-f-e.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
-                            <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
+                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -98,55 +95,79 @@ if ($obj_ses->check_sess('userid')) {
         </nav>
 
         <!-- Page Content -->
+
+
         <div id="page-wrapper">
             <div class="container-fluid">
+                <?php
+
+                $comprobar = "SELECT * FROM `foro_foro`";
+                $ejecutar3 = $conexion->query($comprobar);
+                ?>
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header">Cambiar contreaseña del usuario: <b><?php echo $datos['nombre'] ?></b> </h2>
+                        <h2 class="page-header">Temas del foro</h2>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php include '../../control/mensajes.php'?>
-                        <form action="../../control/estudiante/updateContra.php" method="post" class="form-horizontal" >
-                            <div class="form-group">
-                                <label class="col-md-1">Número de control</label>
-                                <div class="col-md-5">
-                                    <input type="text" disabled  class="form-control " name="nomTxt" value="<?php echo $datos['nombre'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-1">Contraseña Actual</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPas" required>
-                                </div>
-                            </div>
+                        <a href="nuevo-d.php">Nuevo Foro</a>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="col-md-1">Nueva Contraseña</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasN" required>
-                                </div>
-                            </div>
+                </div>
 
-                            <div class="form-group">
-                                <label class="col-md-1">Confirme Contraseña</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasC" required>
-                                </div>
-                            </div>
-                            <input type="hidden" name="idHdn" value="<?php echo $idu ?>">
-                            <div class="col-sm-12">
-                                <button class="btn btn-success">Cambiar</button>
+                <!-- ... Your content goes here ... -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tema</th>
+                                    <th>Último mensaje</th>
+                                    <th>Respuestas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i = 0;
+                                while ($regs = $ejecutar3->fetch_assoc()) {
+                                    $id = $regs['id_foro'];
+                                    echo "<tr>";
+                                    echo "<td>". number_format( $i += 1) ."</td>";
+                                    echo "<td><a href='comentario-e.php?id=$id'>". $regs['foro'] ."</a></td>";
 
-                            </div>
-                        </form>
+                                    $consulta1 = "SELECT * FROM `foro_temas` WHERE `id_foro` ='$id'";
+                                    $ejecutar2 = $conexion->query($consulta1);
+                                    $datos1 = $ejecutar2->fetch_assoc();
+
+                                    if (empty($datos1['contenido'])){
+                                        echo "<td>No hay respuestas</td>";
+                                        echo "<td>0</td>";
+                                    }else {
+                                        echo "<td>" . $datos1['contenido'] . "</td>";
+                                        echo "<td>" . $datos1['hits'] . "</td>";
+                                    }
+
+                                    echo "<tr>";
+                                }
+
+                                $conexion->close();
+                                ?>
+
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+    </div>
 
     </div>
 

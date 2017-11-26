@@ -4,10 +4,7 @@ $obj_ses = new Simple_sessions();
 if ($obj_ses->check_sess('userid')) {
     include "../../control/conexion.php";
     $idu = $obj_ses->get_value('userid');
-
-    $traeru = "SELECT * FROM `usuario` WHERE `id` ='$idu'";
-    $ejecutar = $conexion->query($traeru);
-    $datos = $ejecutar->fetch_assoc();
+    $id = $_GET['id'];
 
     ?>
     <!DOCTYPE html>
@@ -86,10 +83,10 @@ if ($obj_ses->check_sess('userid')) {
                         </li>
 
                         <li>
-                            <a href="../foro/listar-f-e.php" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
+                            <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Foro</a>
                         </li>
                         <li>
-                            <a href="cambiarContra.php" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
+                            <a href="#" class="active"><i class="fa fa-arrows-h fa-fw"></i>Cambiar contraseña</a>
                         </li>
                     </ul>
 
@@ -98,55 +95,93 @@ if ($obj_ses->check_sess('userid')) {
         </nav>
 
         <!-- Page Content -->
+
+
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header">Cambiar contreaseña del usuario: <b><?php echo $datos['nombre'] ?></b> </h2>
+                    <div class="col-lg-6">
+                        <h2 class="page-header">Temas del foro</h2>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <?php include '../../control/mensajes.php'?>
-                        <form action="../../control/estudiante/updateContra.php" method="post" class="form-horizontal" >
-                            <div class="form-group">
-                                <label class="col-md-1">Número de control</label>
-                                <div class="col-md-5">
-                                    <input type="text" disabled  class="form-control " name="nomTxt" value="<?php echo $datos['nombre'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-1">Contraseña Actual</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPas" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-1">Nueva Contraseña</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasN" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-1">Confirme Contraseña</label>
-                                <div class="col-md-5">
-                                    <input type="password"  class="form-control" name="conPasC" required>
-                                </div>
-                            </div>
-                            <input type="hidden" name="idHdn" value="<?php echo $idu ?>">
-                            <div class="col-sm-12">
-                                <button class="btn btn-success">Cambiar</button>
-
-                            </div>
-                        </form>
-
+                    <div class="col-lg-6">
+                        <a href="respuesta.php?id=<?php echo $id ?>" class="btn btn-success">Responder</a>
                     </div>
+                </div>
+                <?php include "../../control/mensajes.php"; ?>
+                <div class="table-responsive">
+                    <table class="table">
+                        <?php
+                        $consulta = "SELECT * FROM `foro_temas` WHERE `id_foro` = '$id'";
+                        $ejecutar = $conexion->query($consulta);
+
+                        while ($datos = $ejecutar->fetch_assoc()) {
+                            $idu = $datos['id_usuario'];
+                            $consulta2 = "SELECT `nombre` FROM `docentes` WHERE `id` = '$idu'";
+                            $ejecutar2 = $conexion->query($consulta2);
+                            $datos2 = $ejecutar2->fetch_assoc();
+
+                            echo "<thead>
+                            <tr>
+                                <th>".$datos2['nombre']." | ".$datos['fecha'] . "</th>
+           
+                            </tr>
+                            </thead>";
+                            echo "<tr>";
+                            echo "<td><b>". $datos['titulo'] ."</b><br>". $datos['contenido']." </td>";
+                            echo "</tr>";
+                            echo "<hr>";
+
+                        }
+
+                        ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <?php
+                        $consulta3 = "SELECT * FROM `comentario_foro` WHERE `id_tema` = '$id'";
+                        $ejecutar3 = $conexion->query($consulta3);
+
+                        while ($regs2 = $ejecutar3->fetch_assoc()) {
+                            $idt = $regs2['id_tema'];
+                            $iduser = $regs2['id_usuario'];
+
+                            $consulta4 = "SELECT `idper` FROM `usuario` WHERE `id` = '$iduser'";
+                            $ejecutar4 = $conexion->query($consulta4);
+                            $datos4 = $ejecutar4->fetch_assoc();
+                            $idp  = $datos4['idper'];
+
+                            $consulta5 = "SELECT `nombre` FROM `docentes` WHERE `id` = '$idp'";
+                            $ejecutar5 = $conexion->query($consulta5);
+                            $datos5 = $ejecutar5->fetch_assoc();
+
+                            echo "<thead>
+                                        <tr>
+                                            <th>".$datos5['nombre']." | ".$regs2['fecha'] . "</th>
+           
+                                        </tr>
+                                     </thead>";
+                            echo "<tr>";
+                            echo "<td>".  $regs2['comentario']." </td>";
+                            echo "</tr>";
+                            echo "<hr>";
+                        }
+
+                        $conexion->close();
+                        ?>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
+    </div>
+    </div>
 
     </div>
 
