@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2017 a las 13:10:22
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 26-11-2017 a las 23:49:09
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -85,6 +85,14 @@ CREATE TABLE `comentario_foro` (
   `fecha` date NOT NULL,
   `activo` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `comentario_foro`
+--
+
+INSERT INTO `comentario_foro` (`id_comentario`, `id_tema`, `id_usuario`, `comentario`, `fecha`, `activo`) VALUES
+(2, 1, 1, 'Esta es una respuesta', '2017-11-26', 1),
+(3, 1, 1, 'Respuesta de un estudiante', '2017-11-26', 1);
 
 -- --------------------------------------------------------
 
@@ -202,6 +210,13 @@ CREATE TABLE `foro_foro` (
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `foro_foro`
+--
+
+INSERT INTO `foro_foro` (`id_foro`, `id_forocategoria`, `foro`, `descripcion`) VALUES
+(1, 2, 'Titulo de prueba', 'Esta es una descripcion de prueba.');
+
 -- --------------------------------------------------------
 
 --
@@ -218,6 +233,13 @@ CREATE TABLE `foro_temas` (
   `activo` int(1) NOT NULL,
   `hits` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `foro_temas`
+--
+
+INSERT INTO `foro_temas` (`id_tema`, `id_foro`, `titulo`, `contenido`, `fecha`, `id_usuario`, `activo`, `hits`) VALUES
+(1, 1, 'Este es  un titulo de prueba', 'Este es un contenido de prueba.', '2017-11-25', 8, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -393,7 +415,7 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `comentario_foro`
 --
 ALTER TABLE `comentario_foro`
-  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -423,13 +445,13 @@ ALTER TABLE `foro_categoria`
 -- AUTO_INCREMENT de la tabla `foro_foro`
 --
 ALTER TABLE `foro_foro`
-  MODIFY `id_foro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_foro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `foro_temas`
 --
 ALTER TABLE `foro_temas`
-  MODIFY `id_tema` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
