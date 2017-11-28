@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2017 a las 16:45:45
+-- Tiempo de generación: 28-11-2017 a las 17:53:53
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.0.25
 
@@ -277,10 +277,10 @@ CREATE TABLE `materias_de_docente` (
 --
 
 INSERT INTO `materias_de_docente` (`id`, `curso_id`, `docente_id`, `estu_id`) VALUES
-(5, 1, 5, NULL),
-(6, 2, 5, NULL),
-(7, 3, 8, NULL),
-(8, 4, 8, NULL);
+(5, 1, 105, NULL),
+(6, 2, 105, NULL),
+(7, 3, 108, NULL),
+(8, 4, 108, NULL);
 
 -- --------------------------------------------------------
 
