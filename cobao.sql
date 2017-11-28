@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2017 a las 23:49:09
+-- Tiempo de generación: 28-11-2017 a las 16:45:45
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.0.25
 
@@ -142,10 +142,10 @@ CREATE TABLE `docentes` (
 --
 
 INSERT INTO `docentes` (`id`, `nombre`, `apaterno`, `amaterno`, `direccion`, `telefono`, `rfc`, `area`, `curp`, `email`) VALUES
-(5, 'Leonel', 'Messi', 'A', 'Rosario', '7876543567', 'CCCC 234578 K90', 'Informatica', '', 'messi@contacto.com'),
-(6, 'Javier', 'Blake', 'C', 'Ciudad de MÃ©xico', '89876543456', 'BJBJ123456L90', 'MÃºsica', 'BBBB 444444 HDFKSO', 'javier@contacto.com'),
-(7, 'Juan', 'Roman', 'Riquelme', 'Buenos Aires', '878787888999', 'ASDF1234456K98', 'MatemÃ¡ticas', '', 'el@contacto.com'),
-(8, 'Ismael', 'Fuentes ', 'de Garay', 'Col. Napoles, CDMX', '55763248', 'FUGI751113L09', 'MÃºsica', 'FUGI751113HDFJS034', 'tito@contacto.com');
+(105, 'Leonel', 'Messi', 'A', 'Rosario', '7876543567', 'CCCC 234578 K90', 'Informatica', '', 'messi@contacto.com'),
+(106, 'Javier', 'Blake', 'C', 'Ciudad de MÃ©xico', '89876543456', 'BJBJ123456L90', 'MÃºsica', 'BBBB 444444 HDFKSO', 'javier@contacto.com'),
+(107, 'Juan', 'Roman', 'Riquelme', 'Buenos Aires', '878787888999', 'ASDF1234456K98', 'MatemÃ¡ticas', '', 'el@contacto.com'),
+(108, 'Ismael', 'Fuentes ', 'de Garay', 'Col. Napoles, CDMX', '55763248', 'FUGI751113L09', 'MÃºsica', 'FUGI751113HDFJS034', 'tito@contacto.com');
 
 -- --------------------------------------------------------
 
@@ -167,16 +167,6 @@ CREATE TABLE `estudiante` (
   `estado` char(1) DEFAULT NULL,
   `grupo` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `estudiante`
---
-
-INSERT INTO `estudiante` (`id`, `nombre`, `apaterno`, `amaterno`, `curp`, `grado`, `num_control`, `escuela_proce`, `email`, `fecha_nac`, `estado`, `grupo`) VALUES
-(1, 'Emma', 'Watson', 'de Bernal', 'WABE890708MLODHS09', '1', '20177000', 'Secundaria Uno', 'emma@cobao.com', '1989-08-09', '1', '102'),
-(2, 'Andres', 'Iniesta', 'Abc', 'INAA811209HJDLSM03', '2', '20177001', 'Secundaria Uno', 'andres@cobao.com', '1988-08-09', '0', '201'),
-(3, 'asdas', 'askdmsa', 'daspdpsao', 'dapsdkapsod', '1', '20177002', 'asdapd', 'adas@adas', '1999-09-09', '0', '102'),
-(4, 'Miguel Angel', 'Preciado ', 'Huidobro', 'PRHM861221HDFNSK32', '1', '20177003', 'Secundaria Jacobo', 'miky@contacto.com', '1986-12-21', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -314,10 +304,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `password`, `email`, `tipo`, `idper`) VALUES
 (1, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@admin.com', '0', '5'),
 (11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', '6'),
-(12, '20177000', '627773b18b3d48f20347a4aa8cc4cb73', NULL, '2', '1'),
-(13, '20177001', 'a1c202acdbaf6e9f3a0983b907e06c93', NULL, '2', '2'),
-(14, 'Fuentes de Garay Ismael', 'be4d6b9a0dc0f06a87c3c68daa0b1e07', 'tito@contacto.com', '1', '8'),
-(15, '20177003', '993ef4a51295ba655b513b382dbb6e2b', NULL, '2', '4');
+(14, 'Fuentes de Garay Ismael', 'be4d6b9a0dc0f06a87c3c68daa0b1e07', 'tito@contacto.com', '1', '8');
 
 --
 -- Índices para tablas volcadas
@@ -433,7 +420,7 @@ ALTER TABLE `docentes`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `foro_categoria`
@@ -469,7 +456,7 @@ ALTER TABLE `materias_de_docente`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
