@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2017 a las 17:53:53
+-- Tiempo de generación: 30-11-2017 a las 12:31:00
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.0.25
 
@@ -294,7 +294,7 @@ CREATE TABLE `usuario` (
   `password` varchar(1000) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `tipo` char(1) DEFAULT NULL,
-  `idper` char(1) DEFAULT NULL
+  `idper` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -302,9 +302,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `password`, `email`, `tipo`, `idper`) VALUES
-(1, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@admin.com', '0', '5'),
-(11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', '6'),
-(14, 'Fuentes de Garay Ismael', 'be4d6b9a0dc0f06a87c3c68daa0b1e07', 'tito@contacto.com', '1', '8');
+(1, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@admin.com', '0', 105),
+(11, 'Blake C Javier', '6142a88d730b9aa48eed872142467129', 'javier@contacto.com', '1', 106),
+(14, 'Fuentes de Garay Ismael', 'be4d6b9a0dc0f06a87c3c68daa0b1e07', 'tito@contacto.com', '1', 108);
 
 --
 -- Índices para tablas volcadas
@@ -414,7 +414,7 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `docentes`
 --
 ALTER TABLE `docentes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `estudiante`
@@ -456,7 +456,7 @@ ALTER TABLE `materias_de_docente`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
